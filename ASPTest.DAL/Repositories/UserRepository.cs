@@ -27,7 +27,21 @@ namespace ASPTest.DAL.Repositories
 
         public User FindById(int id)
         {
-            var user = userDb.Users.Join(depDb.Departments,
+            User user = userDb.Users.Find(id);
+            if (user != null)
+            {
+                Department department = depDb.Departments.Find(user.DepartmentId);
+                user.Department = department;
+            }
+            return user;
+        }
+
+        public List<User> GetUsers()
+        {
+            IEnumerable<User> users = userDb.Users.AsEnumerable();
+            IEnumerable<Department> departments = depDb.Departments.AsEnumerable();
+
+            var result = users.Join(departments,
                 c => c.DepartmentId,
                 d => d.Id,
                 (c, d) => new User
@@ -36,25 +50,9 @@ namespace ASPTest.DAL.Repositories
                     UserName = c.UserName,
                     DepartmentId = c.DepartmentId,
                     Department = new Department() { Id = d.Id, Title = d.Title }
-                });
-            return (User)user;
-        }
+                }).ToList();
 
-        public List<User> GetUsers()
-        {
-            //var users = userDb.Users.Join(depDb.Departments,
-            //    c => c.DepartmentId,
-            //    d => d.Id,
-            //    (c, d) => new User
-            //    {
-            //        Id = c.Id,
-            //        UserName = c.UserName,
-            //        DepartmentId = c.DepartmentId,
-            //        Department = new Department() { Id = d.Id, Title = d.Title }
-            //    }).ToList();
-            //return users;
-
-            return userDb.Users.ToList();
+            return result;
         }
 
         public void Save()
