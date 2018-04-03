@@ -8,6 +8,9 @@ namespace ASPTest.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
+        System.Data.Entity.Database UsersDatabase { get; }
+        System.Data.Entity.Database DepartmentsDatabase { get; }
+
         IUserRepository Users { get; }
 
         IDepartmentRepository Departments { get; }

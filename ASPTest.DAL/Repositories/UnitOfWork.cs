@@ -24,6 +24,22 @@ namespace ASPTest.DAL.Repositories
             departmentRepository = new DepartmentRepository(departmentContext);
         }
 
+        public System.Data.Entity.Database UsersDatabase
+        {
+            get
+            {
+                return userContext.Database;
+            }
+        }
+
+        public System.Data.Entity.Database DepartmentsDatabase
+        {
+            get
+            {
+                return departmentContext.Database;
+            }
+        }
+
         public IUserRepository Users
         {
             get { return userRepository; }

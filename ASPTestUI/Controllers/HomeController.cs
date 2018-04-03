@@ -10,16 +10,16 @@ namespace ASPTestUI.Controllers
     public class HomeController : Controller
     {
         private IUserService userService;
+        private IDepartmentService departmentService;
 
-        public HomeController(IUserService userServ)
+        public HomeController(IUserService userServ, IDepartmentService depServ)
         {
             userService = userServ;
+            departmentService = depServ;
         }
 
         public ActionResult Index()
         {
-            var users = userService.GetUsers();
-
             return View();
         }
 

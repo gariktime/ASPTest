@@ -1,4 +1,5 @@
 ﻿using ASPTest.BLL.DTO;
+using ASPTest.BLL.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ASPTest.BLL.Interfaces
 {
     public interface IUserService : IDisposable
     {
-        void AddUser(UserDTO userDTO);
+        OperationDetails AddUser(UserDTO userDTO);
 
         UserDTO FindUser(int id);
 

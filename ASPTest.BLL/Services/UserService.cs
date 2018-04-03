@@ -1,4 +1,5 @@
 ﻿using ASPTest.BLL.DTO;
+using ASPTest.BLL.Infrastructure;
 using ASPTest.BLL.Interfaces;
 using ASPTest.BLL.Util;
 using ASPTest.DAL.Entities;
@@ -21,14 +22,25 @@ namespace ASPTest.BLL.Services
             db = uow;
         }
 
-        public void AddUser(UserDTO userDTO)
+        public OperationDetails AddUser(UserDTO userDTO)
         {
-            User user = null;
+            try
+            {
+                Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+                User user = Mapper.Map<UserDTO, User>(userDTO);
+                db.Users.Add(user);
+                return new OperationDetails(true, "Пользователь успешно добавлен");
+            }
+            catch
+            {
+                return new OperationDetails(false, "Ошибка при добавлении пользователя");
+            }
         }
 
         public UserDTO FindUser(int id)
         {
-            throw new NotImplementedException();
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+            return Mapper.Map<User, UserDTO>(db.Users.FindById(id));
         }
 
         public List<UserDTO> GetUsers()

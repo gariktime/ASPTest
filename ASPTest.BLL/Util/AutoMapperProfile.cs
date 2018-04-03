@@ -1,11 +1,6 @@
 ﻿using ASPTest.BLL.DTO;
 using ASPTest.DAL.Entities;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASPTest.BLL.Util
 {
@@ -15,6 +10,10 @@ namespace ASPTest.BLL.Util
         {
             CreateMap<User, UserDTO>()
                 .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department));
+
+            CreateMap<UserDTO, User>()
+                .ForMember(dest => dest.Department, opt => opt.Ignore())
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
