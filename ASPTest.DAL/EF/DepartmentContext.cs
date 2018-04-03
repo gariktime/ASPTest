@@ -27,6 +27,7 @@ namespace ASPTest.DAL.EF
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Department>().Ignore(p => p.Users);
             base.OnModelCreating(modelBuilder);
         }
 
@@ -37,9 +38,8 @@ namespace ASPTest.DAL.EF
     {
         protected override void Seed(DepartmentContext db)
         {
-            db.Departments.Add(new Department() { Id = 1, Title = "John" });
-            db.Departments.Add(new Department() { Id = 2, Title = "Peter" });
-            db.Departments.Add(new Department() { Id = 3, Title = "Sam" });
+            db.Departments.Add(new Department() { Id = 1, Title = "IT Department" });
+            db.Departments.Add(new Department() { Id = 2, Title = "Marketing" });
 
             db.SaveChanges();
         }

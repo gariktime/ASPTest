@@ -15,9 +15,11 @@ namespace ASPTest.DAL.Entities
 
         public string Title { get; set; }
 
+        public List<User> Users { get; set; }
+
         public Department()
         {
-
+            Users = new List<User>();
         }
     }
 }
