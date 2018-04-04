@@ -13,7 +13,7 @@ namespace ASPTest.DAL.Interfaces
 
         User FindById(int id);
 
-        List<User> GetUsers();
+        IEnumerable<User> GetUsers();
 
         void Save();
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ASPTest.BLL.Interfaces
 {
-    public interface IDepartmentService
+    public interface IDepartmentService : IDisposable
     {
 
     }

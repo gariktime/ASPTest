@@ -13,7 +13,7 @@ namespace ASPTest.DAL.Interfaces
 
         Department FindById(int id);
 
-        List<Department> GetDepartments();
+        IEnumerable<Department> GetDepartments();
 
         void Save();
     }

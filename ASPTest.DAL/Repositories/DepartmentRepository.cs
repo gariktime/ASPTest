@@ -29,9 +29,9 @@ namespace ASPTest.DAL.Repositories
             return depDb.Departments.Find(id);
         }
 
-        public List<Department> GetDepartments()
+        public IEnumerable<Department> GetDepartments()
         {
-            return depDb.Departments.ToList();
+            return depDb.Departments.AsNoTracking().AsEnumerable();
         }
 
         public void Save()

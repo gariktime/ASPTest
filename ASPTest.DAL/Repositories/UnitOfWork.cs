@@ -20,7 +20,7 @@ namespace ASPTest.DAL.Repositories
         {
             userContext = new UserContext(userDbConStr);
             departmentContext = new DepartmentContext(depDbConStr);
-            userRepository = new UserRepository(userContext, departmentContext);
+            userRepository = new UserRepository(userContext);
             departmentRepository = new DepartmentRepository(departmentContext);
         }
 
