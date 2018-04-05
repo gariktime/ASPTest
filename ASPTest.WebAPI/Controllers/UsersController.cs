@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 
 namespace ASPTest.WebAPI.Controllers
 {
@@ -21,12 +22,22 @@ namespace ASPTest.WebAPI.Controllers
             departmentService = depServ;
         }
 
-        // GET /api/users
-        [ResponseType(typeof(List<UserDTO>))]
-        public IHttpActionResult GetUsers()
+        // POST api/users
+        [ResponseType(typeof(UserDTO))]
+        public IHttpActionResult AddUser(UserDTO userDTO)
         {
-            List<UserDTO> users = userService.GetUsers();
-            return Ok(users);
+            userService.AddUser(userDTO);
+            return CreatedAtRoute("DefaultApi", new { id = userDTO.Id }, userDTO);
+        }
+
+        // PUT api/users/5
+        public IHttpActionResult EditUser(int id, UserDTO userDTO)
+        {
+            if (id != userDTO.Id)
+                return BadRequest();
+
+            userService.EditUser(userDTO);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // GET /api/users/5
@@ -35,6 +46,13 @@ namespace ASPTest.WebAPI.Controllers
         {
             UserDTO user = userService.FindUser(id);
             return Ok(user);
+        }
+
+        // GET /api/users
+        public IEnumerable<UserDTO> GetUsers()
+        {
+            List<UserDTO> users = userService.GetUsers();
+            return users;
         }
 
         protected override void Dispose(bool disposing)

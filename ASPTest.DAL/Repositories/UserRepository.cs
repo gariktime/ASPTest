@@ -23,6 +23,17 @@ namespace ASPTest.DAL.Repositories
             userDb.Users.Add(user);
         }
 
+        public void Edit(User user)
+        {
+            userDb.Entry(user).State = System.Data.Entity.EntityState.Modified;
+        }
+
+        public void Delete(int id)
+        {
+            User user = userDb.Users.Find(id);
+            userDb.Users.Remove(user);
+        }
+
         public User FindById(int id)
         {
             return userDb.Users.Find(id);

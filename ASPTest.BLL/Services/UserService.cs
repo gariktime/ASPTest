@@ -49,6 +49,62 @@ namespace ASPTest.BLL.Services
         }
 
         /// <summary>
+        /// Редактирование
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
+        public OperationDetails EditUser(UserDTO userDTO)
+        {
+            using (var transaction = db.UsersDatabase.BeginTransaction())
+            {
+                try
+                {
+                    Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+                    User user = Mapper.Map<UserDTO, User>(userDTO);
+                    db.Users.Edit(user);
+                    db.Users.Save();
+                    transaction.Commit();
+                    return new OperationDetails(true, "Редактирование успешно завершено");
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return new OperationDetails(false, "Ошибка при редактировании пользователя");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Удаление
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
+        public OperationDetails DeleteUser(int id)
+        {
+            using (var transaction = db.UsersDatabase.BeginTransaction())
+            {
+                try
+                {
+                    User user = db.Users.FindById(id);
+                    if (user != null)
+                    {
+                        db.Users.Delete(id);
+                        db.Users.Save();
+                        transaction.Commit();
+                        return new OperationDetails(true, "Пользователь успешно добавлен");
+                    }
+                    else
+                        return new OperationDetails(false, "Ошибка при удалении пользователя");
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return new OperationDetails(false, "Ошибка при удалении пользователя");
+                }
+            }
+        }
+
+        /// <summary>
         /// Поиск пользователя по ID
         /// </summary>
         /// <param name="id"></param>

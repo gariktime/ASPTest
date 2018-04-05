@@ -12,6 +12,10 @@ namespace ASPTest.BLL.Interfaces
     {
         OperationDetails AddUser(UserDTO userDTO);
 
+        OperationDetails EditUser(UserDTO userDTO);
+
+        OperationDetails DeleteUser(int id);
+
         UserDTO FindUser(int id);
 
         List<UserDTO> GetUsers();

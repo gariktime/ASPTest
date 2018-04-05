@@ -28,7 +28,9 @@ namespace ASPTest.WebAPI
             NinjectModule module = new NinjectModules();
             NinjectModule serviceModule = new ServiceModule("UsersDbConnection", "DepartmentsDbConnection");
             var kernel = new StandardKernel(module, serviceModule);
-            GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
+            var ninjectResolver = new Util.NinjectDependencyResolver(kernel);
+            DependencyResolver.SetResolver(ninjectResolver); // MVC
+            GlobalConfiguration.Configuration.DependencyResolver = ninjectResolver; // Web API
         }
     }
 }

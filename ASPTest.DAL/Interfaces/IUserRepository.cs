@@ -11,6 +11,10 @@ namespace ASPTest.DAL.Interfaces
     {
         void Add(User user);
 
+        void Edit(User user);
+
+        void Delete(int id);
+
         User FindById(int id);
 
         IEnumerable<User> GetUsers();
