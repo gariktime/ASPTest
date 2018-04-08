@@ -24,13 +24,13 @@ namespace ASPTest.WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //внедрение зависимостей
-            NinjectModule module = new NinjectModules();
-            NinjectModule serviceModule = new ServiceModule("UsersDbConnection", "DepartmentsDbConnection");
-            var kernel = new StandardKernel(module, serviceModule);
-            var ninjectResolver = new Util.NinjectDependencyResolver(kernel);
-            DependencyResolver.SetResolver(ninjectResolver); // MVC
-            GlobalConfiguration.Configuration.DependencyResolver = ninjectResolver; // Web API
+            ////внедрение зависимостей
+            //NinjectModule module = new NinjectModules();
+            //NinjectModule serviceModule = new ServiceModule("UsersDbConnection", "DepartmentsDbConnection");
+            //var kernel = new StandardKernel(module, serviceModule);
+            //var ninjectResolver = new Ninject.Web.WebApi.NinjectDependencyResolver(kernel);
+            ////DependencyResolver.SetResolver(ninjectResolver); // MVC
+            //GlobalConfiguration.Configuration.DependencyResolver = ninjectResolver; // Web API
         }
     }
 }

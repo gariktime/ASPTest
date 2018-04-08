@@ -9,7 +9,8 @@ namespace ASPTest.BLL.Util
         public AutoMapperProfile()
         {
             CreateMap<User, UserDTO>()
-                .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department));
+                .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department))
+                .ForMember(dest => dest.DepartmentTitle, opt => opt.MapFrom(src => src.Department.Title));
 
             CreateMap<UserDTO, User>()
                 .ForMember(dest => dest.Department, opt => opt.Ignore())

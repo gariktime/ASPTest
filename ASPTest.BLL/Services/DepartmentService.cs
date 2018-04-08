@@ -1,5 +1,9 @@
-﻿using ASPTest.BLL.Interfaces;
+﻿using ASPTest.BLL.DTO;
+using ASPTest.BLL.Interfaces;
+using ASPTest.BLL.Util;
+using ASPTest.DAL.Entities;
 using ASPTest.DAL.Interfaces;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +19,12 @@ namespace ASPTest.BLL.Services
         public DepartmentService(IUnitOfWork uow)
         {
             db = uow;
+        }
+
+        public List<DepartmentDTO> GetDepartments()
+        {
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+            return Mapper.Map<List<Department>, List<DepartmentDTO>>(db.Departments.GetDepartments().ToList());
         }
 
         public void Dispose()

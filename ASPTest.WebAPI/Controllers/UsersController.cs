@@ -6,11 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
 
 namespace ASPTest.WebAPI.Controllers
 {
+    //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private IUserService userService;
