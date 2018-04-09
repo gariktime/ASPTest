@@ -59,6 +59,8 @@ namespace ASPTest.BLL.Services
                 try
                 {
                     User user = Mapper.Map<UserDTO, User>(userDTO);
+                    user.UserName = userDTO.UserName;
+                    user.DepartmentId = userDTO.DepartmentId;
                     db.Users.Edit(user);
                     db.Users.Save();
                     transaction.Commit();

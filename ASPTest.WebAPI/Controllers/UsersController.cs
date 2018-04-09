@@ -34,32 +34,38 @@ namespace ASPTest.WebAPI.Controllers
         }
 
         // PUT api/users/5
+        [HttpPut]
         public IHttpActionResult EditUser(int id, UserDTO userDTO)
         {
             if (id != userDTO.Id)
                 return BadRequest();
 
-            userService.EditUser(userDTO);
-            return StatusCode(HttpStatusCode.NoContent);
+            OperationDetails od = userService.EditUser(userDTO);
+            if (od.Succeeded == false)
+                return NotFound();
+            else
+                return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/users/5
+        [HttpDelete]
         public IHttpActionResult DeleteUser(int id)
         {
             UserDTO user = userService.FindUser(id);
+            if (user == null)
+                return NotFound();
             OperationDetails od = userService.DeleteUser(id);
             if (od.Succeeded == false)
-                return NotFound();
+                return BadRequest();
             else
                 return Ok(user);
         }
 
         // GET /api/users/5
-        [ResponseType(typeof(UserDTO))]
-        public IHttpActionResult GetUser(int id)
+        public UserDTO GetUser(int id)
         {
             UserDTO user = userService.FindUser(id);
-            return Ok(user);
+            return user;
         }
 
         // GET /api/users

@@ -4,6 +4,8 @@ import { DepartmentService } from '../shared/department.service';
 import { User } from '../shared/user.model';
 import { Department } from '../shared/department.model';
 import { ToastrService } from 'ngx-toastr';  
+import { NgForm } from '@angular/forms'
+import { Router } from '@angular/router'
 import * as $ from 'jquery';
 
 @Component({
@@ -12,32 +14,42 @@ import * as $ from 'jquery';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private userService : UserService, private departmentService: DepartmentService) { }
+  constructor(private userService : UserService, private departmentService: DepartmentService, 
+    private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.departmentService.getDepartmentList();
-    if (this.userService.selectedUserId != null)
-    {
-      //this.userService.selectedUser = this.userService.
-    }
-    else
-    {
-      this.userService.selectedUser = {
-        Id: null,
-        UserName: '',
-        DepartmentId: 1
+
+    $(document).ready(function(){
+      $("#departmentSelect option[value=1]").prop("selected", true)
+    });
+  }
+
+  onSubmit(form: NgForm){
+    if (this.userService.selectedUserId == null) { //добавление пользователя
+      this.userService.addUser(this.userService.selectedUser)
+        .subscribe(data => {
+          this.toastr.success('User added successfully', 'User');
+          this.router.navigate(['/list']);
+        })
       }
-      $(document).ready(function(){
-        $("#departmentSelect option[value=1]").prop("selected", true)
-      });
+    else { //редактирование существующего
+      this.userService.editUser(this.userService.selectedUserId, this.userService.selectedUser)
+        .subscribe(data => {
+          this.toastr.info('User modified successfully', 'User');
+          this.router.navigate(['/list']);
+        }
+      );
     }
   }
 
-  addUser(user: User){
-
-  }
-
-  editUser(user: User){
-
+  resetForm(form?: NgForm){
+    if (form != null)
+      form.reset();
+    this.userService.selectedUser = {
+      Id: null,
+      UserName: '',
+      DepartmentId: 1
+    }
   }
 }

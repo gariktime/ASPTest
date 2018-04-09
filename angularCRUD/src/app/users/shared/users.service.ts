@@ -21,8 +21,9 @@ export class UserService {
     return this.http.post('http://localhost:53697/api/users',body,requestOptions).map(x => x.json());
   }
 
-  editUser(id, user) {
+  editUser(id: number, user: User) {
     var body = JSON.stringify(user);
+    console.log(body);
     var headerOptions = new Headers({ 'Content-Type': 'application/json' });
     var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
     return this.http.put('http://localhost:53697/api/users/' + id, body, requestOptions).map(res => res.json());
@@ -34,6 +35,15 @@ export class UserService {
       return data.json() as User[];
     }).toPromise().then(x => {
       this.userList = x;
+    })
+  }
+
+  getUser(id: number){
+    this.http.get('http://localhost:53697/api/users/' + id)
+    .map((data : Response) =>{
+      return data.json() as User;
+    }).toPromise().then(x => {
+      this.selectedUser = x;
     })
   }
 

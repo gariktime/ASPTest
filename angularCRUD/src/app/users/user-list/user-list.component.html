@@ -1,12 +1,13 @@
 <h1>Список пользователей</h1>
-<input type="button" routerLink='/user' value="Добавить" class="btn btn-default" />
-<input type="button" value="Изменить" class="btn btn-default" (click)="edit()" />
-<input type="button" value="Удалить" class="btn btn-default" (click)="delete()" />
-
+<div class="btn-group">
+    <input type="button" value="Добавить" class="btn btn-default" (click)="addUser()" />
+    <input type="button" value="Изменить" class="btn btn-default" (click)="editUser()" />
+    <input type="button" value="Удалить" class="btn btn-default" (click)="onDelete()" />
+</div>
 <table class="table table-hover">
   <thead>
       <tr>
-          <td>ID</td>
+          <td>#</td>
           <td>Username</td>
           <td>Department</td>
       </tr>

@@ -12,8 +12,7 @@ namespace ASPTest.BLL.Util
                 .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department));
 
             CreateMap<UserDTO, User>()
-                .ForMember(dest => dest.Department, opt => opt.Ignore())
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                .ForMember(dest => dest.Department, opt => opt.Ignore());
         }
     }
 }
