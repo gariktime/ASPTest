@@ -14,8 +14,6 @@ namespace ASPTest.BLL.DTO
 
         public int DepartmentId { get; set; }
 
-        public string DepartmentTitle { get; set; }
-
         public DepartmentDTO Department { get; set; }
 
         public UserDTO()

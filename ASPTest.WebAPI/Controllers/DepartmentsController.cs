@@ -26,5 +26,14 @@ namespace ASPTest.WebAPI.Controllers
             List<DepartmentDTO> departments = departmentService.GetDepartments();
             return departments;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                departmentService.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -9,6 +9,7 @@ import { Department } from'./department.model'
  
 @Injectable()
 export class UserService {
+  selectedUserId: number;
   selectedUser : User;
   userList : User[];
   constructor(private http : Http) { }

@@ -3,24 +3,19 @@
 <input type="button" value="Изменить" class="btn btn-default" (click)="edit()" />
 <input type="button" value="Удалить" class="btn btn-default" (click)="delete()" />
 
-<table class="table table-striped">
+<table class="table table-hover">
   <thead>
       <tr>
           <td>ID</td>
           <td>Username</td>
           <td>Department</td>
-          <td></td>
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let user of userService.userList">
+      <tr *ngFor="let user of userService.userList" (click)="onSelect(user)" class="clickable-row">
             <td>{{user.Id}}</td>
             <td>{{user.UserName}}</td>
             <td>{{user.Department.Title}}</td>
-            <td>
-                <button class="btn btn-sm btn-primary" (click)="editProduct(p)">Изменить</button>
-                <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
-            </td>
       </tr>
   </tbody>
 </table>
