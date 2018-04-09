@@ -24,6 +24,9 @@ namespace ASPTest.WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            //Automapper Initialization
+            App_Start.AutomapperConfig.Initialize();
+
             ////внедрение зависимостей
             //NinjectModule module = new NinjectModules();
             //NinjectModule serviceModule = new ServiceModule("UsersDbConnection", "DepartmentsDbConnection");

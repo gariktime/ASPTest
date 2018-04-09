@@ -33,7 +33,6 @@ namespace ASPTest.BLL.Services
             {
                 try
                 {
-                    Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
                     User user = Mapper.Map<UserDTO, User>(userDTO);
                     db.Users.Add(user);
                     db.Users.Save();
@@ -59,7 +58,6 @@ namespace ASPTest.BLL.Services
             {
                 try
                 {
-                    Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
                     User user = Mapper.Map<UserDTO, User>(userDTO);
                     db.Users.Edit(user);
                     db.Users.Save();
@@ -116,7 +114,6 @@ namespace ASPTest.BLL.Services
             {
                 Department department = db.Departments.FindById(id);
                 user.Department = department;
-                Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
                 return Mapper.Map<User, UserDTO>(db.Users.FindById(id));
             }
             else
@@ -143,7 +140,6 @@ namespace ASPTest.BLL.Services
                                                     Department = new Department() { Id = d.Id, Title = d.Title }
                                                 }).ToList();
 
-            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             return Mapper.Map<List<User>, List<UserDTO>>(userswithdeps);
         }
 

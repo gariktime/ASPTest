@@ -1,4 +1,5 @@
 ﻿using ASPTest.BLL.DTO;
+using ASPTest.BLL.Infrastructure;
 using ASPTest.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Web.Http.Results;
 
 namespace ASPTest.WebAPI.Controllers
 {
-    //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class UsersController : ApiController
     {
         private IUserService userService;
@@ -40,6 +41,17 @@ namespace ASPTest.WebAPI.Controllers
 
             userService.EditUser(userDTO);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // DELETE api/users/5
+        public IHttpActionResult DeleteUser(int id)
+        {
+            UserDTO user = userService.FindUser(id);
+            OperationDetails od = userService.DeleteUser(id);
+            if (od.Succeeded == false)
+                return NotFound();
+            else
+                return Ok(user);
         }
 
         // GET /api/users/5

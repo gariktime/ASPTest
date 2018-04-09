@@ -10,7 +10,7 @@ namespace ASPTest.WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-            //config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
+            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));
             // Конфигурация и службы веб-API
 
             // Маршруты веб-API
@@ -21,6 +21,9 @@ namespace ASPTest.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // отключаем возможность вывода данных в формате xml
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }

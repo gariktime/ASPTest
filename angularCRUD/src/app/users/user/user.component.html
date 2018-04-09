@@ -1,0 +1,23 @@
+<form class="col-md-4">
+  <!-- <div class="form-group" col-md-4>
+    <input class="form-control" name="UserName" #userName="ngModel" [(ngModel)]="userService.selectedUser.username" 
+      placeholder="UserName" required/>
+      <div class="validation-error" *ngIf="UserName.invalid && UserName.touched">This Field is Required.</div>
+  </div> -->
+  <div class="form-group">
+    <select id="departmentId" name="departmentId" [(ngModel)]="DepartmentId" class=form-control>
+        <option *ngFor="let dep of departmentService.departmentList" value={{dep.Id}}
+          [ngValue]="dep.Id">{{dep.Title}}</option>
+    </select>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-4">
+        <button [disabled]="!employeeForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
+          <i class="fa fa-floppy-o"></i> Submit</button>
+      </div>
+      <div class="form-group col-md-4">
+        <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(employeeForm)">
+          <i class="fa fa-repeat"></i> Reset</button>
+      </div>
+    </div>
+</form>

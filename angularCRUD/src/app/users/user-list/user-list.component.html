@@ -1,0 +1,26 @@
+<h1>Список пользователей</h1>
+<input type="button" routerLink='/user' value="Добавить" class="btn btn-default" />
+<input type="button" value="Изменить" class="btn btn-default" (click)="edit()" />
+<input type="button" value="Удалить" class="btn btn-default" (click)="delete()" />
+
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <td>ID</td>
+          <td>Username</td>
+          <td>Department</td>
+          <td></td>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let user of userService.userList">
+            <td>{{user.Id}}</td>
+            <td>{{user.UserName}}</td>
+            <td>{{user.Department.Title}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="editProduct(p)">Изменить</button>
+                <button class="btn btn-sm btn-danger" (click)="delete(p)">Удалить</button>
+            </td>
+      </tr>
+  </tbody>
+</table>

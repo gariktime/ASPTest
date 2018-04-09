@@ -23,7 +23,6 @@ namespace ASPTest.BLL.Services
 
         public List<DepartmentDTO> GetDepartments()
         {
-            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             return Mapper.Map<List<Department>, List<DepartmentDTO>>(db.Departments.GetDepartments().ToList());
         }
 
