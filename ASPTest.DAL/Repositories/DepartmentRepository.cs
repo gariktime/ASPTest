@@ -26,12 +26,12 @@ namespace ASPTest.DAL.Repositories
 
         public Department FindById(int id)
         {
-            return depDb.Departments.Find(id);
+            return depDb.Departments.FirstOrDefault(p => p.Id == id);
         }
 
-        public IEnumerable<Department> GetDepartments()
+        public IQueryable<Department> GetDepartments()
         {
-            return depDb.Departments.AsNoTracking().AsEnumerable();
+            return depDb.Departments.AsNoTracking().AsQueryable();
         }
 
         public void Save()

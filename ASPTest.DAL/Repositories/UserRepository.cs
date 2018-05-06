@@ -30,19 +30,21 @@ namespace ASPTest.DAL.Repositories
 
         public void Delete(int id)
         {
-            User user = userDb.Users.Find(id);
-            userDb.Users.Remove(user);
+            User user = userDb.Users.FirstOrDefault(p => p.Id == id);
+            if (user != null)
+                userDb.Users.Remove(user);
+            else
+                throw new ArgumentException();
         }
 
         public User FindById(int id)
         {
-            return userDb.Users.Find(id);
+            return userDb.Users.FirstOrDefault(p => p.Id == id);
         }
 
-        public IEnumerable<User> GetUsers()
+        public IQueryable<User> GetUsers()
         {
-            return userDb.Users.AsEnumerable();
-
+            return userDb.Users.AsNoTracking().AsQueryable();
         }
 
         public void Save()

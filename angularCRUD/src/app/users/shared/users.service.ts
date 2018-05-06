@@ -23,7 +23,7 @@ export class UserService {
 
   editUser(id: number, user: User) {
     var body = JSON.stringify(user);
-    console.log(body);
+    //console.log(body);
     var headerOptions = new Headers({ 'Content-Type': 'application/json' });
     var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
     return this.http.put('http://localhost:53697/api/users/' + id, body, requestOptions).map(res => res.json());

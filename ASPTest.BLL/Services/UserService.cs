@@ -128,8 +128,8 @@ namespace ASPTest.BLL.Services
         /// <returns></returns>
         public List<UserDTO> GetUsers()
         {
-            IEnumerable<User> users = db.Users.GetUsers();
-            IEnumerable<Department> departments = db.Departments.GetDepartments();
+            List<User> users = db.Users.GetUsers().ToList();
+            List<Department> departments = db.Departments.GetDepartments().ToList();
 
             List<User> userswithdeps = users.Join(departments,
                                                 c => c.DepartmentId,
